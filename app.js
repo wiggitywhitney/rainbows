@@ -4,7 +4,7 @@ var app = express();
 app.use(express.static('public'));
 
 app.get('/', function (req, res) {
-  res.send("Spiders! Spiders! SPIDERS!");
+  res.send("Spiders! Rainbows! SPIDERS AND RAINBOWS!");
 });
 
 app.listen(3000, function () {
