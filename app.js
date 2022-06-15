@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 
 app.get('/', function (req, res) {
-  res.send('pretend this is some rainbows');
+  res.send(images/rainbowsrainbowsrainbows.png);
 });
 
 app.listen(3000, function () {
