@@ -1,17 +1,17 @@
-
-### create sunshine2 service
-kn service create sunshine2 --image=whitneyl042/rainbows:v1
-
-
-### describe sunshine2 service
-kn service describe sunshine2
+Okay 
+### create sunshine7 service
+kn service create sunshine7 --image=whitneyl042/rainbows:v1
 
 
-### get all sunshine2 Kubernetes resources
-kubectl get all | grep sunshine2
+### describe sunshine7 service
+kn service describe sunshine7
 
 
-### get all sunshine2 Kubernetes resources
+### get all sunshine7 Kubernetes resources
+kubectl get all | grep sunshine7
+
+
+### get all sunshine7 Kubernetes resources
 kubectl get pods
 
 
@@ -20,24 +20,24 @@ watch kubectl get pods
 
 
 ### create a custom route for the spiders website
-kn service update sunshine2 --image whitneyl042/rainbows:v2 --tag sunshine2-00002=spiders --traffic sunshine2-00001=100
+kn service update sunshine7 --image whitneyl042/rainbows:v2 --tag sunshine7-00002=spiders --traffic sunshine7-00001=100
 
 
 ### send 10% of traffic to newest revision
-kn service update sunshine2 --image whitneyl042/rainbows:v3 --traffic sunshine2-00001=90 --traffic @latest=10
+kn service update sunshine7 --image whitneyl042/rainbows:v3 --traffic sunshine7-00001=90 --traffic @latest=10
 
 
-### describe sunshine2 service
-kn service describe sunshine2
+### describe sunshine7 service
+kn service describe sunshine7
 
 
 ### gradually rollout 100% of traffic to newest revision
-kn service update sunshine2 --traffic @latest=100 --annotation-service serving.knative.dev/rollout-duration="60s"
+kn service update sunshine7 --traffic @latest=100 --annotation-service serving.knative.dev/rollout-duration="60s"
 
 
 ### show serving yaml
-kn service describe sunshine2 -o yaml
+kn service describe sunshine7 -o yaml
 
 
 ### rollback to last safe version
-kn service update sunshine2 --traffic sunshine2-00001=100 
+kn service update sunshine7 --traffic sunshine7-00001=100 
