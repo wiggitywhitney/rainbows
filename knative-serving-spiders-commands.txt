@@ -1,17 +1,24 @@
-
-### create sunshine2 service
-kn service create sunshine2 --image=whitneyl042/rainbows:v1
-
-
-### describe sunshine2 service
-kn service describe sunshine2
+### show knative running
+k get pod -n knative-serving
 
 
-### get all sunshine2 Kubernetes resources
-kubectl get all | grep sunshine2
+### create sunshine1 service
+kn service create sunshine1 --image=whitneyl042/rainbows:v1
 
 
-### get all sunshine2 Kubernetes resources
+### describe sunshine1 service
+kn service describe sunshine1
+
+
+### show knative serving yaml
+cat knative-serving.yaml
+
+
+### get all sunshine1 Kubernetes resources
+kubectl get all | grep sunshine1
+
+
+### get all sunshine1 Kubernetes resources
 kubectl get pods
 
 
@@ -20,24 +27,75 @@ watch kubectl get pods
 
 
 ### create a custom route for the spiders website
-kn service update sunshine2 --image whitneyl042/rainbows:v2 --tag sunshine2-00002=spiders --traffic sunshine2-00001=100
+kn service update sunshine1 --image whitneyl042/rainbows:v2 --tag sunshine1-00002=spiders --traffic sunshine1-00001=100
 
 
 ### send 10% of traffic to newest revision
-kn service update sunshine2 --image whitneyl042/rainbows:v3 --traffic sunshine2-00001=90 --traffic @latest=10
+kn service update sunshine1 --image whitneyl042/rainbows:v3 --traffic sunshine1-00001=90 --traffic @latest=10
 
 
-### describe sunshine2 service
-kn service describe sunshine2
+### describe sunshine1 service
+kn service describe sunshine1
+
+
+### watch sunshine1 service
+watch kn service describe sunshine1
 
 
 ### gradually rollout 100% of traffic to newest revision
-kn service update sunshine2 --traffic @latest=100 --annotation-service serving.knative.dev/rollout-duration="60s"
+kn service update sunshine1 --traffic @latest=100 --annotation-service serving.knative.dev/rollout-duration="60s"
+
+
+### watch sunshine1 service
+watch kn service describe sunshine1
 
 
 ### show serving yaml
-kn service describe sunshine2 -o yaml
+kn service describe sunshine1 -o yaml
 
 
 ### rollback to last safe version
-kn service update sunshine2 --traffic sunshine2-00001=100 
+kn service update sunshine1 --traffic sunshine1-00001=100 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: sunshine1
+  namespace: jbcn
+spec:
+  template:
+    spec:
+      containers:
+      - image: whitneyl042/rainbows:v1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
