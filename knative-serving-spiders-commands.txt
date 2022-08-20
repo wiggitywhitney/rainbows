@@ -18,7 +18,7 @@ cat knative-serving.yaml
 kubectl get all | grep sunshineexplore
 
 
-### get all sunshineexplore Kubernetes resources
+### show pods scaling to zero
 kubectl get pods
 
 
