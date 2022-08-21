@@ -1,6 +1,3 @@
-### show knative running
-kubectl get pod -n knative-serving
-
 
 ### create sunshineexplore service
 kn service create sunshineexplore --image=whitneyl042/rainbows:v1
@@ -8,10 +5,6 @@ kn service create sunshineexplore --image=whitneyl042/rainbows:v1
 
 ### describe sunshineexplore service
 kn service describe sunshineexplore
-
-
-### show knative serving yaml
-cat knative-serving.yaml
 
 
 ### get all sunshineexplore Kubernetes resources
@@ -38,16 +31,8 @@ kn service update sunshineexplore --image whitneyl042/rainbows:v3 --traffic suns
 kn service describe sunshineexplore
 
 
-### watch sunshineexplore service
-watch kn service describe sunshineexplore
-
-
 ### gradually rollout 100% of traffic to newest revision
 kn service update sunshineexplore --traffic @latest=100 --annotation-service serving.knative.dev/rollout-duration="60s"
-
-
-### watch sunshineexplore service
-watch kn service describe sunshineexplore
 
 
 ### show serving yaml
@@ -56,25 +41,6 @@ kn service describe sunshineexplore -o yaml
 
 ### rollback to last safe version
 kn service update sunshineexplore --traffic sunshineexplore-00001=100 
-
-
-### rollout new grinning spiders image (rollout will be gradual)
-kn service update sunshineexplore --image=whitneyl042/rainbows:v4 --traffic @latest=100
-
-
-### get all sunshineexplore Kubernetes resources again to show all K8s resources associated w each revision
-kubectl get all | grep sunshineexplore
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -87,19 +53,3 @@ metadata:
     spec:
       containers:
       - image: whitneyl042/rainbows:v1
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
