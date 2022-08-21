@@ -11,6 +11,6 @@
   "dependencies": {
     "@godaddy/terminus": "^4.11.1",
     "express": "^4.17.3",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.7"
   }
 }
