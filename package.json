@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@godaddy/terminus": "^4.11.1",
     "express": "^4.17.3"
   }
 }
