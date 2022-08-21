@@ -1,17 +1,17 @@
 
-### create sunshine2 service
-kn service create sunshine2 --image=whitneyl042/rainbows:v1
+### create sunshineexplore service
+kn service create sunshineexplore --image=whitneyl042/rainbows:v1
 
 
-### describe sunshine2 service
-kn service describe sunshine2
+### describe sunshineexplore service
+kn service describe sunshineexplore
 
 
-### get all sunshine2 Kubernetes resources
-kubectl get all | grep sunshine2
+### get all sunshineexplore Kubernetes resources
+kubectl get all | grep sunshineexplore
 
 
-### get all sunshine2 Kubernetes resources
+### show pods scaling to zero
 kubectl get pods
 
 
@@ -20,24 +20,36 @@ watch kubectl get pods
 
 
 ### create a custom route for the spiders website
-kn service update sunshine2 --image whitneyl042/rainbows:v2 --tag sunshine2-00002=spiders --traffic sunshine2-00001=100
+kn service update sunshineexplore --image whitneyl042/rainbows:v2 --tag sunshineexplore-00002=spiders --traffic sunshineexplore-00001=100
 
 
 ### send 10% of traffic to newest revision
-kn service update sunshine2 --image whitneyl042/rainbows:v3 --traffic sunshine2-00001=90 --traffic @latest=10
+kn service update sunshineexplore --image whitneyl042/rainbows:v3 --traffic sunshineexplore-00001=90 --traffic @latest=10
 
 
-### describe sunshine2 service
-kn service describe sunshine2
+### describe sunshineexplore service
+kn service describe sunshineexplore
 
 
 ### gradually rollout 100% of traffic to newest revision
-kn service update sunshine2 --traffic @latest=100 --annotation-service serving.knative.dev/rollout-duration="60s"
+kn service update sunshineexplore --traffic @latest=100 --annotation-service serving.knative.dev/rollout-duration="60s"
 
 
 ### show serving yaml
-kn service describe sunshine2 -o yaml
+kn service describe sunshineexplore -o yaml
 
 
 ### rollback to last safe version
-kn service update sunshine2 --traffic sunshine2-00001=100 
+kn service update sunshineexplore --traffic sunshineexplore-00001=100 
+
+
+
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: sunshineexplore
+  namespace: explore
+  template:
+    spec:
+      containers:
+      - image: whitneyl042/rainbows:v1
