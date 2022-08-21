@@ -11,7 +11,7 @@ kn service describe sunshineexplore
 kubectl get all | grep sunshineexplore
 
 
-### sho pods scaling to zero
+### show pods scaling to zero
 kubectl get pods
 
 
